@@ -1,14 +1,13 @@
 class CompanyRepository
   class << self
-
-    def create_company(name, zip, website = '')
+    def create(company_struct)
       uuid = SecureRandom.uuid
 
       Company.create({
         uuid: uuid,
-        name: name,
-        zip: zip,
-        website: website,
+        name: company_struct.name,
+        zip: company_struct.zip,
+        website: company_struct.website,
       })
     end
   end
