@@ -9,7 +9,7 @@
 
 </head>
 <body>
-  <h1>Import CSV file</h1>
+  <h1>Import a CSV file to create entities in the database</h1>
   <div id="app">
     <form method="POST" enctype="multipart/form-data" action="fup.cgi">
       <strong>File to upload:</strong> <input type="file" name="file"><br/>
@@ -36,6 +36,7 @@
           Http.setRequestHeader("Authorization", "123qwe");
           Http.send(this.formData);
           Http.onreadystatechange=(e)=>{
+            console.log(e)
             console.log(Http.responseText)
           }
         }
