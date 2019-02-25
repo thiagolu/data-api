@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+  <h1>Import CSV file</h1>
+  <div id="app">
+    <form method="POST" enctype="multipart/form-data" action="fup.cgi">
+      <strong>File to upload:</strong> <input type="file" name="file"><br/>
+      <br/>
+      <button @click="parseFiles" type="button">Click to send</button>
+    </form>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        formData: new FormData(),
+      },
+      methods: {
+        parseFiles(event) {
+          const file = document.querySelector('[type=file]').files[0];
+          this.formData.append('file', file);
+          this.setHttpRequest();
+        },
+        setHttpRequest() {
+          const Http = new XMLHttpRequest();
+          const url='http://localhost:3000/import';
+          Http.open("put", url);
+          Http.setRequestHeader("Authorization", "123qwe");
+          Http.send(this.formData);
+          Http.onreadystatechange=(e)=>{
+            console.log(Http.responseText)
+          }
+        }
+      },
+    })
+  </script> 
+</body>
+</html>
