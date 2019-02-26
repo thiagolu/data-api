@@ -4,7 +4,7 @@ class CompanyRepository
       uuid = SecureRandom.uuid
 
       Company.create({
-        uuid: uuid,
+        uuid: company_struct.id || uuid,
         name: company_struct.name,
         zip: company_struct.zip,
         website: company_struct.website,

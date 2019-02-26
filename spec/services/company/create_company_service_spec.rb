@@ -12,9 +12,8 @@ RSpec.describe Company::CreateCompanyService do
 
   describe "perform" do
     it "creates companies from list" do
-      expect(repository_mock).to receive(:create).with(companies[-1])
+      expect(repository_mock).to receive(:create).twice
       create_service.perform(companies)
     end
   end
-  
 end
