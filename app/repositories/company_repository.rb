@@ -7,6 +7,12 @@ class CompanyRepository
         zip: company_struct.zip || '',
         website: company_struct.website || '',
       })
+    rescue ActiveRecord::RecordNotUnique, ActiveRecord::StatementInvalid
+      false
+    end
+
+    def search(companies_data)
+      
     end
   end
 end

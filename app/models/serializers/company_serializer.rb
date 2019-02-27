@@ -4,7 +4,7 @@ module Serializers
       def treat_data(company)
         company.name = remove_white_spaces(company.name)
         company.zip = remove_non_numerical(company.zip)
-        company.website = validate_uri(company.website)
+        company.website = validate_uri(remove_white_spaces(company.website))
 
         company
       end

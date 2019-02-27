@@ -18,7 +18,9 @@ class ApplicationController < ActionController::API
       Serializers::CompanySerializer.treat_data(company)
     end
 
-    # reponse = AggregateCompanyDataService.new(company_repository).perform
+    reponse = Company::AggregateCompanyDataService.new(company_repository).perform(companies_list)
+
+    render status: 200, json: { data: 'response' }
     # Match data
     # update data
     # response

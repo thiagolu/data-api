@@ -5,13 +5,13 @@ class Company
     end
 
     def perform(companies)
+      ids = companies.pluck(:id)
+      existing_companies = Company.where(id: ids)
+      new_companies = companies.reject { |company| !ids.include?(company.id) }
+
       ActiveRecord::Base.transaction do
-        companies.each do |company|
-          begin
-            @company_repository.create(company)
-          rescue ActiveRecord::RecordNotUnique
-            next
-          end
+        new_companies.each do |company|
+          @company_repository.create(company)
         end
       end
     end
