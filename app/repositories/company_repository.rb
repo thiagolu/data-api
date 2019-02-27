@@ -12,7 +12,15 @@ class CompanyRepository
     end
 
     def search(companies_data)
-      
+      names = companies_data.pluck(:name)
+      zips = companies_data.pluck(:zip)
+
+      Company.where(name: names).or(Company.where(zip: zips))
     end
+
+    def update(company, col, value)
+      search([company]).update("#{col.to_s}": value)
+    end
+    
   end
 end
