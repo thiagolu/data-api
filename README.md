@@ -1,3 +1,25 @@
+Api to merge data from a csv file, contaning information about a Company profile. The data templates used for development can be found on the `data_templates/` folder
+
+**API routes**
+```ruby
+  post '/import', to: 'application#import'
+  put '/integrate_data', to: 'application#integrate_data'
+
+```
+
+**Request body**
+```ruby
+{
+  file: File
+}
+```
+
+**Web urls**
+To import data into the database: http://localhost:3000/
+
+And http://localhost:3000/integrate.html to add website information
+
+For convinience docker was used on this project, so in case you don't have it installed this is a quick setup copied from the official website:
 
 ## Project setup with docker
 
