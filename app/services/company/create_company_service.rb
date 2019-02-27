@@ -6,7 +6,11 @@ class Company
 
     def perform(companies)
       companies.each do |company|
-        @company_repository.create(company)
+        begin
+          @company_repository.create(company)
+        rescue ActiveRecord::RecordNotUnique
+          next
+        end
       end
     end
   end

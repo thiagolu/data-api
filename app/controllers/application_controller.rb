@@ -1,33 +1,26 @@
-require 'csv'
-
 class ApplicationController < ActionController::API
   before_action :validate_api_request
 
   API_TOKEN = '123qwe'
 
   def import
-    render status: 200, json: { data: parse_csv_data }
-  end
-  
-  def parse_csv_data
-    CSV.parse(params[:file].read)
+    companies_list = Company::CsvParser.parse_file_data_to_struct(params[:file])
+    response = Company::CreateCompanyService.new(CompanyRepository).perform(companies_list)
+
+    render status: 200, json: { data: response }
   end
 
-  def create_company_record(company_struct)
-    
+  def integrate_data
+    # Receive data -> Treat data
+    # Match data
+    # update data
+    # response
+    700.times { puts '***********8' }
   end
+  
 
-  def create_companies_service
-    
-  end
-  
-  def data_treatment
-    
-  end
-  
-  
   def status
-    render status: 200, json: { it_works: 'works' }
+    render status: 200, json: { it_works: 'segue o baile' }
   end
   
   private
